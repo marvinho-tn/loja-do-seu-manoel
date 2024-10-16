@@ -1,6 +1,3 @@
 namespace Store.Domain.Entities;
 
-public class Product
-{
-    
-}
+public class Product : Measurable { }

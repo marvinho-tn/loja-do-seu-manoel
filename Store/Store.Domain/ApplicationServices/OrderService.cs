@@ -8,6 +8,6 @@ public class OrderService : IOrderService
 {
     public async Task<Result<List<Order>>> ProccessOrdersAsync(List<Order> orders)
     {
-        throw new NotImplementedException();
+        return new Result<List<Order>>();
     }
 }

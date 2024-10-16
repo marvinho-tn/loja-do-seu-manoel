@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Domain.Services;
-using Store.Domain.Utils;
 
 namespace Store.Api.Controllers
 {
@@ -27,7 +26,7 @@ namespace Store.Api.Controllers
                 return UnprocessableEntity(result);
             }
             
-            return Created("pedidos", result);
+            return Created("pedidos", result.ToViewModelResult());
         }
     }
 }

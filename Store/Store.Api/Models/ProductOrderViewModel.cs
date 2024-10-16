@@ -3,4 +3,4 @@ using System.Text.Json.Serialization;
 
 namespace Store.Api.Models;
 
-public class ProductOrderModel : MeasurableModel { }
+public class ProductOrderViewModel : MeasurableModel { }

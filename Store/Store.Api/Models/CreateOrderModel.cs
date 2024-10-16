@@ -12,8 +12,16 @@ public class CreateOrderModel
 
     public Order ConvertToOrder()
     {
-        var order = new Order();
-        
+        var order = new Order(true)
+        {
+            Products = Products.Select(product => new Product
+            {
+                Width = product.Width,
+                Height = product.Height,
+                Length = product.Length
+            }).ToList()
+        };
+
         return order;
     }
 }
