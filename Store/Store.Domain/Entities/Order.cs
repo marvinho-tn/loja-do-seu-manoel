@@ -18,9 +18,9 @@ public class Order(bool newOrder = false)
         }
     }
     
-    public void Box(List<Product> product, Box box)
+    public void Box(List<Product> products, Box box)
     {
-        box.Products.AddRange(product);
+        box.Products.AddRange(products);
 
         if (!Boxes.Any(orderBox => orderBox.Equals(box)))
         {

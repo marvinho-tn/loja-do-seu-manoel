@@ -25,9 +25,18 @@ public class OrderService(IBoxRepository boxRepository): IOrderService
             return result;
         }
 
+        var boxes = (await boxRepository.GetAllTypesOfBoxesAsync()).OrderBy(box => box.Volume).ToList();
+        
         foreach (var order in orders)
         {
-            await ProccessOrderAsync(boxRepository, order);
+            BoxOrder(boxes, order);
+        }
+
+        if (orders.Any(order => !order.Boxes.Any()))
+        {
+            result.AddValidation(ValidationType.ImpossibleToBoxOrder);
+            
+            return result;
         }
         
         result.Obj = orders;
@@ -35,20 +44,15 @@ public class OrderService(IBoxRepository boxRepository): IOrderService
         return result;
     }
 
-    private static async Task ProccessOrderAsync(IBoxRepository boxRepository, Order order)
-    {
-        var boxes = (await boxRepository.GetAllTypesOfBoxesAsync()).OrderBy(box => box.Volume);
-
-        BoxProducts(boxes, order);
-    }
-
-    private static void BoxProducts(IEnumerable<Box> boxes, Order order)
+    private static void BoxOrder(List<BoxMold> boxes, Order order)
     {
         var productsNotBoxed = order.Products.Where(product => !order.IsBoxed(product)).ToList();
         
         //tenta colocar todos os produtos em uma unica caixa
-        foreach (var box in boxes)
+        foreach (var boxMold in boxes)
         {
+            var box = new Box(boxMold);
+            
             if (box.AllProductsFit(productsNotBoxed))
             {
                 order.Box(productsNotBoxed, box);
@@ -58,17 +62,19 @@ public class OrderService(IBoxRepository boxRepository): IOrderService
         }
         
         //pega a menor caixa para colocar o maximo de produtos
-        var biggestBox = order.Boxes.MaxBy(box => box.Volume);
+        var biggestBoxMold = boxes.MaxBy(box => box.Volume);
 
         foreach (var product in productsNotBoxed)
         {
-            if (biggestBox.RemainderVolume > product.Volume)
+            var biggestBox = new Box(biggestBoxMold);
+
+            if (biggestBox.RemainderVolume >= product.Volume)
             {
                 order.Box(product, biggestBox);
             }
         }
         
         //refazer o processo
-        BoxProducts(boxes, order);
+        BoxOrder(boxes, order);
     }
 }

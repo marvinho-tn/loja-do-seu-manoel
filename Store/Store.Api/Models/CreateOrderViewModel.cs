@@ -24,7 +24,7 @@ public static class CreateOrderViewModelExtensions
                 Id = order.Id.Value,
                 Boxes = order.Boxes.Select(box => new BoxOrderViewModel
                 {
-                    Id = box.Id,
+                    Id = box.Id.Value,
                     Height = box.Height,
                     Width = box.Width,
                     Length = box.Length,

@@ -24,5 +24,6 @@ public class Validation
 public enum ValidationType
 {
     OrderListCannotBeEmpty,
-    ProductOrderListCannotBeEmpty
+    ProductOrderListCannotBeEmpty,
+    ImpossibleToBoxOrder
 }
