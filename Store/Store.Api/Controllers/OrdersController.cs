@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Domain.Services;
+using Store.Domain.Utils;
 
 namespace Store.Api.Controllers
 {
@@ -15,11 +16,16 @@ namespace Store.Api.Controllers
 
             if (!ModelState.IsValid)
             {
-                return UnprocessableEntity(ModelState);
+                return BadRequest(ModelState);
             }
 
             var orders = ordersModel.ConvertToOrder();
             var result = await orderService.ProccessOrdersAsync(orders);
+
+            if (!result.IsValid())
+            {
+                return UnprocessableEntity(result);
+            }
             
             return Created("pedidos", result);
         }

@@ -1,7 +1,7 @@
 using Store.Domain.ApplicationServices;
 using Store.Domain.Entities;
 
-namespace Store.Tests;
+namespace Store.Tests.Services;
 
 public class OrderServiceTests
 {
