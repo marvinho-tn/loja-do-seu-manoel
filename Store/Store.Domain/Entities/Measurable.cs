@@ -5,4 +5,6 @@ public abstract class Measurable
     public int Width { get; set; }
     public int Height { get; set; }
     public int Length { get; set; }
+
+    public int Volume => Height * Width * Length;
 }

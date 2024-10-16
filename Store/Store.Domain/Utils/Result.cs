@@ -7,7 +7,12 @@ public class Result<T>
     
     public bool IsValid()
     {
-        return Validations.Any();
+        return !Validations.Any();
+    }
+
+    public void AddValidation(ValidationType type)
+    {
+        Validations.Add(new Validation { Type = type });
     }
 }
 
@@ -18,5 +23,6 @@ public class Validation
 
 public enum ValidationType
 {
-    
+    OrderListCannotBeEmpty,
+    ProductOrderListCannotBeEmpty
 }
