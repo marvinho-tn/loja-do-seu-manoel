@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Store.Domain.Entities;
 
@@ -6,11 +5,9 @@ namespace Store.Api.Models;
 
 public class CreateOrderModel
 {
-    [Required]
     [JsonPropertyName("pedido_id")]
     public uint Id { get; set; }
     
-    [Required]
     [JsonPropertyName("produtos")]
     public List<ProductOrderModel> Products { get; set; } = [];
 

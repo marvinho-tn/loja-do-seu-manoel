@@ -13,22 +13,15 @@ namespace Store.Api.Controllers
         [Authorize]
         public async Task<IActionResult> PostOrdersAsync([FromBody] CreateOrdersModel ordersModel)
         {
-            TryValidateModel(ordersModel);
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var orders = ordersModel.ConvertToOrder();
             var result = await orderService.ProccessOrdersAsync(orders);
 
             if (!result.IsValid())
             {
-                return UnprocessableEntity(result);
+                return UnprocessableEntity(result.Validations);
             }
             
-            return Created("pedidos", result.ToViewModelResult());
+            return Created("pedidos", result.ToViewModelResult().Obj);
         }
     }
 }
