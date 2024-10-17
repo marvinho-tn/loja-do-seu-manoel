@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
 using Store.Domain.Services;
@@ -9,6 +10,7 @@ namespace Store.Api.Controllers
     public class OrdersController(IOrderService orderService) : ControllerBase
     {
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> PostOrdersAsync([FromBody] CreateOrdersModel ordersModel)
         {
             TryValidateModel(ordersModel);
