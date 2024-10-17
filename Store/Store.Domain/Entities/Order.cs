@@ -1,8 +1,8 @@
 namespace Store.Domain.Entities;
 
-public class Order(bool newOrder = false)
+public class Order
 {
-    public Guid? Id { get; set; } = newOrder ? Guid.NewGuid() : null;
+    public uint Id { get; set; }
     public List<Product> Products { get; set; } = [];
     public List<Box> Boxes { get; set; } = [];
     

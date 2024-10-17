@@ -1,10 +1,10 @@
 namespace Store.Domain.Entities;
 
-public abstract class Measurable
+public class Measurable
 {
-    public int Width { get; set; }
-    public int Height { get; set; }
-    public int Length { get; set; }
+    public uint Width { get; set; }
+    public uint Height { get; set; }
+    public uint Length { get; set; }
 
-    public int Volume => Height * Width * Length;
+    public uint Volume => Height * Width * Length;
 }

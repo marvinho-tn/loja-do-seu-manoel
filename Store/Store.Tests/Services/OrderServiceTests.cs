@@ -22,21 +22,30 @@ public class OrderServiceTests
                 {
                     new Product
                     {
-                        Height = 10,
-                        Length = 10,
-                        Width = 10,
+                        Dimensions = new Measurable
+                        {
+                            Height = 10,
+                            Length = 10,
+                            Width = 10,
+                        }
                     },
                     new Product
                     {
-                        Height = 20,
-                        Length = 10,
-                        Width = 10,
+                        Dimensions = new Measurable
+                        {
+                            Height = 20,
+                            Length = 10,
+                            Width = 10,
+                        }
                     },
                     new Product
                     {
-                        Height = 30,
-                        Length = 10,
-                        Width = 10,
+                        Dimensions = new Measurable
+                        {
+                            Height = 30,
+                            Length = 10,
+                            Width = 10,
+                        }
                     },
                 },
             },
@@ -46,21 +55,33 @@ public class OrderServiceTests
                 {
                     new Product
                     {
-                        Height = 10,
-                        Length = 20,
-                        Width = 10,
+                        
+                        Dimensions = new Measurable
+                        {
+                            Height = 10,
+                            Length = 20,
+                            Width = 10,
+                        }
                     },
                     new Product
                     {
-                        Height = 20,
-                        Length = 20,
-                        Width = 10,
+                        
+                        Dimensions = new Measurable
+                        {
+                            Height = 20,
+                            Length = 20,
+                            Width = 10,
+                        }
                     },
                     new Product
                     {
-                        Height = 30,
-                        Length = 20,
-                        Width = 10,
+                        
+                        Dimensions = new Measurable
+                        {
+                            Height = 30,
+                            Length = 20,
+                            Width = 10,
+                        }
                     },
                 },
             },
@@ -115,21 +136,33 @@ public class OrderServiceTests
                 {
                     new Product
                     {
-                        Height = 10,
-                        Length = 10,
-                        Width = 10,
+                        
+                        Dimensions = new Measurable
+                        {
+                            Height = 10,
+                            Length = 10,
+                            Width = 10,
+                        }
                     },
                     new Product
                     {
-                        Height = 20,
-                        Length = 10,
-                        Width = 10,
+                        
+                        Dimensions = new Measurable
+                        {
+                            Height = 20,
+                            Length = 10,
+                            Width = 10,
+                        }
                     },
                     new Product
                     {
-                        Height = 30,
-                        Length = 10,
-                        Width = 10,
+                        
+                        Dimensions = new Measurable
+                        {
+                            Height = 30,
+                            Length = 10,
+                            Width = 10,
+                        }
                     },
                 },
             },
@@ -182,7 +215,7 @@ public class OrderServiceTests
         Assert.NotNull(result);
         Assert.Null(result.Obj);
         Assert.NotEmpty(result.Validations);
-        Assert.True(result.Validations.Any(validation => validation.Type == ValidationType.OrderListCannotBeEmpty));
+        Assert.Contains(result.Validations, validation => validation.Type == ValidationType.OrderListCannotBeEmpty);
     }
 
     [Fact]
@@ -204,7 +237,7 @@ public class OrderServiceTests
         Assert.NotNull(result);
         Assert.Null(result.Obj);
         Assert.NotEmpty(result.Validations);
-        Assert.True(result.Validations.Any(validation => validation.Type == ValidationType.ProductOrderListCannotBeEmpty));
+        Assert.Contains(result.Validations, validation => validation.Type == ValidationType.ProductOrderListCannotBeEmpty);
     }
 
     [Fact]
@@ -221,9 +254,12 @@ public class OrderServiceTests
                 {
                     new Product
                     {
-                        Height = 150,
-                        Length = 150,
-                        Width = 200,
+                        Dimensions = new Measurable
+                        {
+                            Height = 150,
+                            Length = 150,
+                            Width = 200,
+                        }
                     },
                 },
             },
@@ -258,6 +294,6 @@ public class OrderServiceTests
         Assert.NotNull(result);
         Assert.Null(result.Obj);
         Assert.NotEmpty(result.Validations);
-        Assert.True(result.Validations.Any(validation => validation.Type == ValidationType.ImpossibleToBoxOrder));
+        Assert.Contains(result.Validations, validation => validation.Type == ValidationType.ImpossibleToBoxOrder);
     }
 }

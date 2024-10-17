@@ -68,7 +68,7 @@ public class OrderService(IBoxRepository boxRepository): IOrderService
         {
             var biggestBox = new Box(biggestBoxMold);
 
-            if (biggestBox.RemainderVolume >= product.Volume)
+            if (biggestBox.RemainderVolume >= product.Dimensions.Volume)
             {
                 order.Box(product, biggestBox);
             }

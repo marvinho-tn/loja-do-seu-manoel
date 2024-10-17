@@ -7,17 +7,17 @@ public class Box : Measurable
         Width = boxMold?.Width ?? 0;
         Height = boxMold?.Height ?? 0;
         Length = boxMold?.Length ?? 0;
-        Id = boxMold is not null ? Guid.NewGuid() : null;
+        Id = $"Caixa {Width}x{Height}x{Length}";
     }
     
-    public Guid? Id { get; set; }
+    public string Id { get; set; }
     public List<Product> Products { get; set; } = [];
     
-    public int RemainderVolume => Volume - Products.Sum(p => p.Volume);
+    public long RemainderVolume => Volume - Products.Sum(p => p.Dimensions.Volume);
 
     public bool AllProductsFit(List<Product> products)
     {
-        return RemainderVolume >= products.Sum(p => p.Volume);
+        return RemainderVolume >= products.Sum(p => p.Dimensions.Volume);
     }
 
     public bool OfType(BoxMold boxMold)

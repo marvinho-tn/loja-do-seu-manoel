@@ -9,7 +9,7 @@ namespace Store.Api.Controllers
     public class OrdersController(IOrderService orderService) : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> PostOrdersAsync([FromBody] List<CreateOrderModel> ordersModel)
+        public async Task<IActionResult> PostOrdersAsync([FromBody] CreateOrdersModel ordersModel)
         {
             TryValidateModel(ordersModel);
 

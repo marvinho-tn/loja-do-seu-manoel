@@ -6,17 +6,14 @@ namespace Store.Api.Models;
 public class MeasurableModel
 {
     [Required]
-    [MinLength(0)]
     [JsonPropertyName("altura")]
-    public int Height { get; set; }
+    public uint Height { get; set; }
 
     [Required]
-    [MinLength(0)]
     [JsonPropertyName("largura")]
-    public int Width { get; set; }
+    public uint Width { get; set; }
 
     [Required]
-    [MinLength(0)]
     [JsonPropertyName("comprimento")]
-    public int Length { get; set; }
+    public uint Length { get; set; }
 }

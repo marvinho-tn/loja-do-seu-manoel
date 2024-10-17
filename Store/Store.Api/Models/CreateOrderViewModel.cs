@@ -6,8 +6,8 @@ namespace Store.Api.Models;
 
 public class CreateOrderViewModel
 {
-    [JsonPropertyName("id")]
-    public Guid Id { get; set; }
+    [JsonPropertyName("pedido_id")]
+    public uint Id { get; set; }
     
     [JsonPropertyName("caixas")]
     public List<BoxOrderViewModel> Boxes { get; set; }
@@ -21,19 +21,11 @@ public static class CreateOrderViewModelExtensions
         {
             Obj = ordersResult.Obj.Select(order => new CreateOrderViewModel
             {
-                Id = order.Id.Value,
+                Id = order.Id,
                 Boxes = order.Boxes.Select(box => new BoxOrderViewModel
                 {
-                    Id = box.Id.Value,
-                    Height = box.Height,
-                    Width = box.Width,
-                    Length = box.Length,
-                    Products = box.Products.Select(product => new ProductOrderViewModel
-                    {
-                        Height = product.Height,
-                        Width = product.Width,
-                        Length = product.Length,
-                    }).ToList(),
+                    Id = box.Id,
+                    Products = box.Products.Select(product => product.Id).ToList(),
                 }).ToList(),
             }).ToList(),
             Validations = ordersResult.Validations,

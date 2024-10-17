@@ -2,11 +2,11 @@ using System.Text.Json.Serialization;
 
 namespace Store.Api.Models;
 
-public class BoxOrderViewModel : MeasurableModel
+public class BoxOrderViewModel
 {
-    [JsonPropertyName("id")]
-    public Guid Id { get; set; }
+    [JsonPropertyName("caixa_id")]
+    public string Id { get; set; }
     
     [JsonPropertyName("produtos")]
-    public List<ProductOrderViewModel> Products { get; set; }
+    public List<string> Products { get; set; }
 }

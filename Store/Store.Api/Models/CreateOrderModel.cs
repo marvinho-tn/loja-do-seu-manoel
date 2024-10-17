@@ -7,29 +7,30 @@ namespace Store.Api.Models;
 public class CreateOrderModel
 {
     [Required]
+    [JsonPropertyName("pedido_id")]
+    public uint Id { get; set; }
+    
+    [Required]
     [JsonPropertyName("produtos")]
     public List<ProductOrderModel> Products { get; set; } = [];
 
     public Order ConvertToOrder()
     {
-        var order = new Order(true)
+        var order = new Order
         {
+            Id = Id,
             Products = Products.Select(product => new Product
             {
-                Width = product.Width,
-                Height = product.Height,
-                Length = product.Length
+                Id = product.Id,
+                Dimensions = new Measurable
+                {
+                    Height = product.Dimensions.Height,
+                    Width = product.Dimensions.Width,
+                    Length = product.Dimensions.Length,
+                },
             }).ToList()
         };
 
         return order;
-    }
-}
-
-public static class CreateOrderModelExtensions
-{
-    public static List<Order> ConvertToOrder(this List<CreateOrderModel> orders)
-    {
-        return orders.Select(order => order.ConvertToOrder()).ToList();
     }
 }
