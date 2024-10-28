@@ -5,29 +5,18 @@ namespace Store.Api.Models;
 
 public class CreateOrderModel
 {
-    [JsonPropertyName("pedido_id")]
+    [JsonPropertyName("pedido_id")] 
     public uint Id { get; set; }
     
     [JsonPropertyName("produtos")]
-    public List<ProductOrderModel> Products { get; set; } = [];
+    public IEnumerable<ProductOrderModel> Products { get; set; } = [];
 
     public Order ConvertToOrder()
     {
-        var order = new Order
+        return new Order
         {
             Id = Id,
-            Products = Products.Select(product => new Product
-            {
-                Id = product.Id,
-                Dimensions = new Measurable
-                {
-                    Height = product.Dimensions.Height,
-                    Width = product.Dimensions.Width,
-                    Length = product.Dimensions.Length,
-                },
-            }).ToList()
+            Products = Products.Select(product => product.ConvertToProduct()).ToList()
         };
-
-        return order;
     }
 }

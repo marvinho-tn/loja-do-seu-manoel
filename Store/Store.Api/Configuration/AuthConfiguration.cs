@@ -9,18 +9,18 @@ namespace Store.Api.Configuration;
 
 public static class AuthConfiguration
 {
-    public static void ConfigureAuth(this WebApplicationBuilder builder)
+    public static void AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         // Mapeia a seção JwtSettings do appsettings.json
-        builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
+        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
 
-        var jwtSettingsSection = builder.Configuration.GetSection("JwtSettings");
+        var jwtSettingsSection = configuration.GetSection("JwtSettings");
         var secretKey = jwtSettingsSection["SecretKey"];
         var issuer = jwtSettingsSection["Issuer"];
         var audience = jwtSettingsSection["Audience"];
 
         // Adiciona o serviço de autenticação JWT
-        builder.Services.AddAuthentication(options =>
+        services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -39,6 +39,6 @@ public static class AuthConfiguration
                 };
             });
         // Injeta serviços de autorização
-        builder.Services.AddTransient<IAuthService, AuthService>();
+        services.AddTransient<IAuthService, AuthService>();
     }
 }

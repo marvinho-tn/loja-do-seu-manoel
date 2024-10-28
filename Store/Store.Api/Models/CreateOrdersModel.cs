@@ -5,8 +5,8 @@ namespace Store.Api.Models;
 
 public class CreateOrdersModel
 {
-    [JsonPropertyName("pedidos")]
-    public List<CreateOrderModel> Orders { get; set; }
+    [JsonPropertyName("pedidos")] 
+    public IEnumerable<CreateOrderModel> Orders { get; set; } = [];
 
     public List<Order> ConvertToOrder()
     {

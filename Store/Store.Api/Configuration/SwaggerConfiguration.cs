@@ -4,10 +4,10 @@ namespace Store.Api.Configuration;
 
 public static class SwaggerConfiguration
 {
-    public static void ConfigureSwagger(this WebApplicationBuilder builder)
+    public static void AddStoreSwagger(this IServiceCollection services)
     {
         // Configurando o Swagger para suportar JWT
-        builder.Services.AddSwaggerGen(options =>
+        services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo { Title = "Store API", Version = "v1" });
 

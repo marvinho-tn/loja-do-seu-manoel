@@ -4,9 +4,9 @@ namespace Store.Api.Models;
 
 public class UserLoginModel
 {
-    [JsonPropertyName("usuario")]
-    public string Username { get; set; }
+    [JsonPropertyName("usuario")] 
+    public string Username { get; set; } = null!;
     
     [JsonPropertyName("senha")]
-    public string Password { get; set; }
+    public string Password { get; set; } = null!;
 }
