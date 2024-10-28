@@ -11,6 +11,6 @@ public class AuthController(IAuthService authService) : ControllerBase
     {
         var token = authService.Auth(login.Username, login.Password);
         
-        return token != null ? Ok(new { token }) : Unauthorized();
+        return token is not null ? Ok(new { token }) : Unauthorized();
     }
 }
