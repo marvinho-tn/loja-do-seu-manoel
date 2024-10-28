@@ -6,7 +6,8 @@ public class Order
     public List<Product> Products { get; set; } = [];
     public List<Box> Boxes { get; set; } = [];
     
-    public bool IsBoxed(Product product) => Boxes.Any(box => box.Products.Any(boxedProduct => boxedProduct.Equals(product)));
+    public bool IsBoxed(Product product) => 
+        Boxes.Any(box => box.Products.Any(boxedProduct => boxedProduct.Equals(product)));
 
     public void Box(Product product, Box box)
     {
@@ -20,11 +21,9 @@ public class Order
     
     public void Box(List<Product> products, Box box)
     {
-        box.Products.AddRange(products);
-
-        if (!Boxes.Any(orderBox => orderBox.Equals(box)))
+        foreach (var product in products)
         {
-            Boxes.Add(box);
+            Box(product, box);
         }
     }
 }

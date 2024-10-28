@@ -1,25 +1,22 @@
 using Store.Domain.Entities;
 using Store.Domain.Repositories;
 using Store.Domain.Utils;
+using Store.Domain.Validations;
 
 namespace Store.Domain.Services.Application;
 
-public class OrderService(IBoxRepository boxRepository): IOrderService
+public class OrderService
+(
+    IBoxRepository boxRepository, 
+    ProccessOrdersValidation proccessOrdersValidation, 
+    PostProccessOrdersValidation postProccessOrdersValidation
+): 
+    IOrderService
 {
     public async Task<Result<List<Order>>> ProccessOrdersAsync(List<Order> orders)
     {
-        var result = new Result<List<Order>>();
-
-        if (!orders.Any())
-        {
-            result.AddValidation(ValidationType.OrderListCannotBeEmpty);
-        }
-
-        if (!orders.All(order => order.Products.Any()))
-        {
-            result.AddValidation(ValidationType.ProductOrderListCannotBeEmpty);
-        }
-
+        var result = proccessOrdersValidation.Validate(orders);
+        
         if (!result.IsValid())
         {
             return result;
@@ -31,11 +28,11 @@ public class OrderService(IBoxRepository boxRepository): IOrderService
         {
             BoxOrder(boxes, order);
         }
-
-        if (orders.Any(order => !order.Boxes.Any()))
+        
+        result = postProccessOrdersValidation.Validate(orders);
+        
+        if (!result.IsValid())
         {
-            result.AddValidation(ValidationType.ImpossibleToBoxOrder);
-            
             return result;
         }
         

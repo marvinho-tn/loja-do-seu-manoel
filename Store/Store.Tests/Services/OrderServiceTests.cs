@@ -3,6 +3,7 @@ using Store.Domain.Entities;
 using Store.Domain.Repositories;
 using Store.Domain.Services.Application;
 using Store.Domain.Utils;
+using Store.Domain.Validations;
 
 namespace Store.Tests.Services;
 
@@ -13,7 +14,9 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var orderService = new OrderService(boxRepository);
+        var proccessOrdersValidation = new ProccessOrdersValidation();
+        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order
@@ -127,7 +130,9 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var orderService = new OrderService(boxRepository);
+        var proccessOrdersValidation = new ProccessOrdersValidation();
+        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order
@@ -205,7 +210,9 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var orderService = new OrderService(boxRepository);
+        var proccessOrdersValidation = new ProccessOrdersValidation();
+        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>();
         
         //Act
@@ -223,7 +230,9 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var orderService = new OrderService(boxRepository);
+        var proccessOrdersValidation = new ProccessOrdersValidation();
+        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order(),
@@ -245,7 +254,9 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var orderService = new OrderService(boxRepository);
+        var proccessOrdersValidation = new ProccessOrdersValidation();
+        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order

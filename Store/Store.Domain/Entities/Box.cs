@@ -13,15 +13,12 @@ public class Box : Measurable
     public string Id { get; set; }
     public List<Product> Products { get; set; } = [];
     
-    public long RemainderVolume => Volume - Products.Sum(p => p.Dimensions.Volume);
+    public long RemainderVolume => 
+        Volume - Products.Sum(p => p.Dimensions.Volume);
 
-    public bool AllProductsFit(List<Product> products)
-    {
-        return RemainderVolume >= products.Sum(p => p.Dimensions.Volume);
-    }
+    public bool AllProductsFit(List<Product> products) => 
+        RemainderVolume >= products.Sum(p => p.Dimensions.Volume);
 
-    public bool OfType(BoxMold boxMold)
-    {
-        return boxMold.Height == Height && boxMold.Width == Width && boxMold.Length == Length;
-    }
+    public bool OfType(BoxMold boxMold) => 
+        boxMold.Height == Height && boxMold.Width == Width && boxMold.Length == Length;
 }
