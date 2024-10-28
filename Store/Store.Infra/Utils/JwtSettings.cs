@@ -1,4 +1,4 @@
-namespace Store.Domain.Utils;
+namespace Store.Infra.Utils;
 
 public class JwtSettings
 {

@@ -3,9 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Store.Domain.Utils;
+using Store.Infra.Utils;
 
-namespace Store.Domain.Services.Infra;
+namespace Store.Infra.Services.Implementations;
 
 public class AuthService(IOptions<JwtSettings> jwtSettings) : IAuthService
 {

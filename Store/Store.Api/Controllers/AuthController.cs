@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Store.Api.Models;
-using Store.Domain.Services;
+using Store.Infra.Services;
 
 [ApiController]
 [Route("autenticacao")]

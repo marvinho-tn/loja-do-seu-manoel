@@ -1,4 +1,4 @@
-namespace Store.Domain.Services;
+namespace Store.Infra.Services;
 
 public interface IAuthService
 {

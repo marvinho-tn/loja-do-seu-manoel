@@ -1,9 +1,9 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Store.Domain.Services;
-using Store.Domain.Services.Infra;
-using Store.Domain.Utils;
+using Store.Infra.Services;
+using Store.Infra.Services.Implementations;
+using Store.Infra.Utils;
 
 namespace Store.Api.Configuration;
 

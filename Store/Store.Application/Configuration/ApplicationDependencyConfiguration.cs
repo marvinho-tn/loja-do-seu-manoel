@@ -8,7 +8,6 @@ public static class ApplicationDependencyConfiguration
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        //Serviços
         services.AddTransient<IOrderService, OrderService>();
 
         return services;
