@@ -4,9 +4,9 @@ namespace Store.Domain.Repositories.Implementations;
 
 public class BoxRepository : IBoxRepository
 {
-    public async Task<IEnumerable<BoxMold>> GetAllTypesOfBoxesAsync()
+    public IEnumerable<BoxMold> GetAllTypesOfBoxes()
     {
-        return await Task.Run(() => new List<BoxMold>
+        return new List<BoxMold>
         {
             new BoxMold
             {
@@ -26,6 +26,6 @@ public class BoxRepository : IBoxRepository
                 Width = 80,
                 Length = 60,
             },
-        });
+        };
     }
 }

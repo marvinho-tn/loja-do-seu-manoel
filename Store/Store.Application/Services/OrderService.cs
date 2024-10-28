@@ -1,35 +1,36 @@
 using Store.Domain.Entities;
 using Store.Domain.Repositories;
+using Store.Domain.Services;
 using Store.Domain.Utils;
 using Store.Domain.Validations;
 
-namespace Store.Domain.Services.Application;
+namespace Store.Application.Services;
 
 public class OrderService
 (
     IBoxRepository boxRepository, 
-    ProccessOrdersValidation proccessOrdersValidation, 
-    PostProccessOrdersValidation postProccessOrdersValidation
+    ProcessOrdersValidation processOrdersValidation, 
+    PostProcessOrdersValidation postProcessOrdersValidation
 ): 
     IOrderService
 {
-    public async Task<Result<List<Order>>> ProccessOrdersAsync(List<Order> orders)
+    public Result<List<Order>> ProcessOrders(List<Order> orders)
     {
-        var result = proccessOrdersValidation.Validate(orders);
+        var result = processOrdersValidation.Validate(orders);
         
         if (!result.IsValid())
         {
             return result;
         }
 
-        var boxes = (await boxRepository.GetAllTypesOfBoxesAsync()).OrderBy(box => box.Volume).ToList();
+        var boxes = boxRepository.GetAllTypesOfBoxes().OrderBy(box => box.Volume).ToList();
         
         foreach (var order in orders)
         {
             BoxOrder(boxes, order);
         }
         
-        result = postProccessOrdersValidation.Validate(orders);
+        result = postProcessOrdersValidation.Validate(orders);
         
         if (!result.IsValid())
         {

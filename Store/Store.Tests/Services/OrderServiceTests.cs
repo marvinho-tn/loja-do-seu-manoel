@@ -1,7 +1,7 @@
 using NSubstitute;
+using Store.Application.Services;
 using Store.Domain.Entities;
 using Store.Domain.Repositories;
-using Store.Domain.Services.Application;
 using Store.Domain.Utils;
 using Store.Domain.Validations;
 
@@ -14,8 +14,8 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var proccessOrdersValidation = new ProccessOrdersValidation();
-        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var proccessOrdersValidation = new ProcessOrdersValidation();
+        var postProccessOrdersValidation = new PostProcessOrdersValidation();
         var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
@@ -90,7 +90,7 @@ public class OrderServiceTests
             },
         };
         
-        boxRepository.GetAllTypesOfBoxesAsync().Returns(new List<BoxMold>
+        boxRepository.GetAllTypesOfBoxes().Returns(new List<BoxMold>
         {
             new BoxMold
             {
@@ -113,7 +113,7 @@ public class OrderServiceTests
         });
         
         //Act
-        var result = await orderService.ProccessOrdersAsync(orders);
+        var result = orderService.ProcessOrders(orders);
 
         //Asserts
         Assert.NotNull(result);
@@ -130,8 +130,8 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var proccessOrdersValidation = new ProccessOrdersValidation();
-        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var proccessOrdersValidation = new ProcessOrdersValidation();
+        var postProccessOrdersValidation = new PostProcessOrdersValidation();
         var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
@@ -195,10 +195,10 @@ public class OrderServiceTests
             },
         };
         
-        boxRepository.GetAllTypesOfBoxesAsync().Returns(boxMolds);
+        boxRepository.GetAllTypesOfBoxes().Returns(boxMolds);
         
         //Act
-        var result = await orderService.ProccessOrdersAsync(orders);
+        var result = orderService.ProcessOrders(orders);
 
         //Asserts
         Assert.Empty(result.Validations);
@@ -210,13 +210,13 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var proccessOrdersValidation = new ProccessOrdersValidation();
-        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var proccessOrdersValidation = new ProcessOrdersValidation();
+        var postProccessOrdersValidation = new PostProcessOrdersValidation();
         var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>();
         
         //Act
-        var result = await orderService.ProccessOrdersAsync(orders);
+        var result = orderService.ProcessOrders(orders);
 
         //Asserts
         Assert.NotNull(result);
@@ -230,8 +230,8 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var proccessOrdersValidation = new ProccessOrdersValidation();
-        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var proccessOrdersValidation = new ProcessOrdersValidation();
+        var postProccessOrdersValidation = new PostProcessOrdersValidation();
         var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
@@ -240,7 +240,7 @@ public class OrderServiceTests
         };
         
         //Act
-        var result = await orderService.ProccessOrdersAsync(orders);
+        var result = orderService.ProcessOrders(orders);
 
         //Asserts
         Assert.NotNull(result);
@@ -254,8 +254,8 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
-        var proccessOrdersValidation = new ProccessOrdersValidation();
-        var postProccessOrdersValidation = new PostProccessOrdersValidation();
+        var proccessOrdersValidation = new ProcessOrdersValidation();
+        var postProccessOrdersValidation = new PostProcessOrdersValidation();
         var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
@@ -276,7 +276,7 @@ public class OrderServiceTests
             },
         };
         
-        boxRepository.GetAllTypesOfBoxesAsync().Returns(new List<BoxMold>
+        boxRepository.GetAllTypesOfBoxes().Returns(new List<BoxMold>
         {
             new BoxMold
             {
@@ -299,7 +299,7 @@ public class OrderServiceTests
         });
         
         //Act
-        var result = await orderService.ProccessOrdersAsync(orders);
+        var result = orderService.ProcessOrders(orders);
 
         //Asserts
         Assert.NotNull(result);

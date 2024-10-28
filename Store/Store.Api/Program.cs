@@ -1,4 +1,5 @@
 using Store.Api.Configuration;
+using Store.Application.Configuration;
 using Store.Domain.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddStoreSwagger();
 builder.Services.AddDomain();
+builder.Services.AddApplication();
 
 var app = builder.Build();
 

@@ -11,10 +11,10 @@ namespace Store.Api.Controllers
     {
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> PostOrdersAsync([FromBody] CreateOrdersModel ordersModel)
+        public IActionResult PostOrders([FromBody] CreateOrdersModel ordersModel)
         {
             var orders = ordersModel.ConvertToOrder();
-            var result = await orderService.ProccessOrdersAsync(orders);
+            var result = orderService.ProcessOrders(orders);
 
             if (!result.IsValid())
             {

@@ -5,5 +5,5 @@ namespace Store.Domain.Services;
 
 public interface IOrderService
 {
-    Task<Result<List<Order>>> ProccessOrdersAsync(List<Order> orders);
+    Result<List<Order>> ProcessOrders(List<Order> orders);
 }

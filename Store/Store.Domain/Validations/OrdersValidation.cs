@@ -3,7 +3,7 @@ using Store.Domain.Utils;
 
 namespace Store.Domain.Validations;
 
-public class ProccessOrdersValidation
+public class ProcessOrdersValidation
 {
     public Result<List<Order>> Validate(List<Order> orders)
     {
@@ -23,7 +23,7 @@ public class ProccessOrdersValidation
     }
 }
 
-public class PostProccessOrdersValidation
+public class PostProcessOrdersValidation
 {
     public Result<List<Order>> Validate(List<Order> orders)
     {
