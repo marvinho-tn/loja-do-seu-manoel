@@ -30,7 +30,7 @@ namespace Store.Api.Controllers
                 return UnprocessableEntity(result.Validations);
             }
             
-            return Created("pedidos", result.ConvertToViewModelResult().Obj);
+            return Created("", result.Obj.ConvertToViewModelResult());
         }
     }
 }

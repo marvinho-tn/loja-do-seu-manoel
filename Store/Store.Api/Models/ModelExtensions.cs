@@ -13,20 +13,16 @@ public static class CreateOrderViewModelExtensions
     /// </summary>
     /// <param name="ordersResult">Objeto de resultado.</param>
     /// <returns>Objeto de resultado com a view.</returns>
-    public static Result<List<CreateOrderViewModel>> ConvertToViewModelResult(this Result<List<Order>> ordersResult)
+    public static IEnumerable<CreateOrderViewModel> ConvertToViewModelResult(this List<Order> ordersResult)
     {
-        return new Result<List<CreateOrderViewModel>>()
+        return ordersResult.Select(order => new CreateOrderViewModel
         {
-            Obj = ordersResult.Obj.Select(order => new CreateOrderViewModel
+            Id = order.Id,
+            Boxes = order.Boxes.Select(box => new BoxOrderViewModel
             {
-                Id = order.Id,
-                Boxes = order.Boxes.Select(box => new BoxOrderViewModel
-                {
-                    Id = box.Id,
-                    Products = box.Products.Select(product => product.Id).ToList(),
-                }).ToList(),
-            }).ToList(),
-            Validations = ordersResult.Validations,
-        };
+                Id = box.Id,
+                Products = box.Products.Select(product => product.Id),
+            }),
+        });
     }
 }
