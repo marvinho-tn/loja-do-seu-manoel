@@ -7,8 +7,14 @@ using Store.Infra.Utils;
 
 namespace Store.Api.Configuration;
 
+/// <summary>
+/// Classe de configuração da autenticação na API.
+/// </summary>
 public static class AuthConfiguration
 {
+    /// <summary>
+    /// Método de adição da configuração aos serviços da API.
+    /// </summary>
     public static void AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         // Mapeia a seção JwtSettings do appsettings.json

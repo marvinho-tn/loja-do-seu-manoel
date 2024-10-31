@@ -2,8 +2,14 @@ using Microsoft.OpenApi.Models;
 
 namespace Store.Api.Configuration;
 
+/// <summary>
+/// Classe de configuração da documentação da API.
+/// </summary>
 public static class SwaggerConfiguration
 {
+    /// <summary>
+    /// Método de adição da configuração aos serviços da API.
+    /// </summary>
     public static void AddStoreSwagger(this IServiceCollection services)
     {
         // Configurando o Swagger para suportar JWT
