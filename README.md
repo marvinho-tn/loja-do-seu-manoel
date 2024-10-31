@@ -31,12 +31,17 @@ Uma API simples desenvolvida em .NET Core 8, responsável por receber pedidos e 
   dotnet build
   ```
 
-5. Inicie a aplicação:
+5. Execute os testes:
+  ```bash
+  dotnet test
+  ```
+
+6. Inicie a aplicação:
   ```bash
   dotnet run
   ```
 
-6. Acesse a documentação endpoint disponível em http://localhost:5000/swagger para enviar pedidos e organizar produtos para envio.
+7. Acesse a documentação endpoint disponível em http://localhost:5000/swagger para enviar pedidos e organizar produtos para envio.
 
 ## Contribuição
 
