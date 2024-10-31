@@ -6,6 +6,9 @@ using Store.Domain.Validations;
 
 namespace Store.Application.Services;
 
+/// <summary>
+/// Classse de representação do serviço de pedidos.
+/// </summary>
 public class OrderService
 (
     IBoxRepository boxRepository, 
@@ -14,6 +17,11 @@ public class OrderService
 ): 
     IOrderService
 {
+    /// <summary>
+    /// Método de processamento de pedidos.
+    /// </summary>
+    /// <param name="orders">Pedidos a serem processados.</param>
+    /// <returns>Listagem de pedidos processados.</returns>
     public Result<List<Order>> ProcessOrders(List<Order> orders)
     {
         var result = processOrdersValidation.Validate(orders);
