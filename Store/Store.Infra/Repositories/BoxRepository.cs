@@ -3,8 +3,15 @@ using Store.Domain.Repositories;
 
 namespace Store.Infra.Repositories;
 
+/// <summary>
+/// Classe de repositório de caixas.
+/// </summary>
 public class BoxRepository : IBoxRepository
 {
+    /// <summary>
+    /// Método de busca de moldes de caixas disponíveis.
+    /// </summary>
+    /// <returns>Listagem com moldes de caixa.</returns>
     public IEnumerable<BoxMold> GetAllTypesOfBoxes()
     {
         return new List<BoxMold>

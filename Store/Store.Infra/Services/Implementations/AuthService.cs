@@ -7,8 +7,17 @@ using Store.Infra.Utils;
 
 namespace Store.Infra.Services.Implementations;
 
+/// <summary>
+/// Classe de representação da autenticação dos serviços.
+/// </summary>
 public class AuthService(IOptions<JwtSettings> jwtSettings) : IAuthService
 {
+    /// <summary>
+    /// Método de autenticação.
+    /// </summary>
+    /// <param name="username">Usuário a ser autenticado.</param>
+    /// <param name="password">Senha do usuário.</param>
+    /// <returns>Token de autenticação.</returns>
     public string? Auth(string username, string password)
     {
         if (username != jwtSettings.Value.DefaultUsername || password != jwtSettings.Value.DefaultPassword) return null;
