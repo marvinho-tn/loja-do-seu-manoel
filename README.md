@@ -44,13 +44,3 @@ Uma API simples desenvolvida em .NET Core 8, responsável por receber pedidos e 
 7. Acesse a documentação disponível em:
 
    - http://localhost:5000/swagger
-
-## Contribuição
-
-Contribuições são bem-vindas!
-
-Para contribuir:
-- Crie um fork do repositório.
-- Crie uma nova branch para suas modificações (git checkout -b minha-feature).
-- Envie suas mudanças (git push origin minha-feature).
-- Abra um Pull Request.
