@@ -3,8 +3,16 @@ using Store.Domain.Utils;
 
 namespace Store.Domain.Validations;
 
+/// <summary>
+/// Classe de representação de validações para o processamento de pedidos.
+/// </summary>
 public class ProcessOrdersValidation
 {
+    /// <summary>
+    /// Metodo de execução das validações a partir de uma lista de pedidos.
+    /// </summary>
+    /// <param name="orders">Pedidos a ser validados.</param>
+    /// <returns>Resultado das validações.</returns>
     public Result<List<Order>> Validate(List<Order> orders)
     {
         var result = new Result<List<Order>>();
@@ -23,8 +31,16 @@ public class ProcessOrdersValidation
     }
 }
 
+/// <summary>
+/// Classe de representação de validações após o processamento de pedidos.
+/// </summary>
 public class PostProcessOrdersValidation
 {
+    /// <summary>
+    /// Metodo de execução das validações a partir de uma lista de pedidos.
+    /// </summary>
+    /// <param name="orders">Pedidos a ser validados.</param>
+    /// <returns>Resultado das validações.</returns>
     public Result<List<Order>> Validate(List<Order> orders)
     {
         var result = new Result<List<Order>>();
