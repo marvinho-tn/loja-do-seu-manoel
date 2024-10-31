@@ -41,7 +41,9 @@ Uma API simples desenvolvida em .NET Core 8, responsável por receber pedidos e 
   dotnet run
   ```
 
-7. Acesse a documentação endpoint disponível em http://localhost:5000/swagger para enviar pedidos e organizar produtos para envio.
+7. Acesse a documentação disponível em:
+
+   - http://localhost:5000/swagger
 
 ## Contribuição
 
