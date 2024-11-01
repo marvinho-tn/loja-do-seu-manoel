@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Store.Domain.Repositories;
+using Store.Infra.Configuration.Database;
 using Store.Infra.Repositories;
 
 namespace Store.Infra.Configuration;
@@ -16,6 +19,17 @@ public static class InfraDependencyConfiguration
     {
         services.AddTransient<IBoxRepository, BoxRepository>();
 
+        services.AddDbContext<StoreDbContext>(options => options.UseInMemoryDatabase("StoreDb"));
+
         return services;
+    }
+
+    public static IApplicationBuilder UseInfra(this IApplicationBuilder app)
+    {
+        var context = app.ApplicationServices.GetRequiredService<StoreDbContext>();
+        
+        context.Database.EnsureCreated();
+
+        return app;
     }
 }

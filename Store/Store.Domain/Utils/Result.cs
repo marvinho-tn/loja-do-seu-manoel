@@ -51,8 +51,12 @@ public class Validation(ValidationType type)
 /// </summary>
 public enum ValidationType
 {
-    OrderListCannotBeEmpty,
-    ProductOrderListCannotBeEmpty,
-    ImpossibleToBoxOrder,
-    UnexpectedError,
+    //Unprocessable Entity
+    OrderListCannotBeEmpty = 422001,
+    ProductOrderListCannotBeEmpty = 422002,
+    ImpossibleToBoxOrder = 422003,
+    EmptyBoxMoldList = 422004,
+    
+    //Internal Server Error
+    UnexpectedError = 500001,
 }

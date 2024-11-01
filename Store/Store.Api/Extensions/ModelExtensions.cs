@@ -1,5 +1,4 @@
 using Store.Domain.Entities;
-using Store.Domain.Utils;
 
 namespace Store.Api.Models;
 
@@ -11,11 +10,16 @@ public static class CreateOrderViewModelExtensions
     /// <summary>
     /// Método que pega o resultado e converte para a view.
     /// </summary>
-    /// <param name="ordersResult">Objeto de resultado.</param>
+    /// <param name="orders">Objeto de resultado.</param>
     /// <returns>Objeto de resultado com a view.</returns>
-    public static IEnumerable<CreateOrderViewModel> ConvertToViewModelResult(this List<Order> ordersResult)
+    public static IEnumerable<CreateOrderViewModel>? ConvertToViewModelResult(this IEnumerable<Order>? orders)
     {
-        return ordersResult.Select(order => new CreateOrderViewModel
+        if (orders is null)
+        {
+            return null;
+        }
+        
+        return orders.Select(order => new CreateOrderViewModel
         {
             Id = order.Id,
             Boxes = order.Boxes.Select(box => new BoxOrderViewModel

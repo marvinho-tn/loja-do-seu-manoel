@@ -16,16 +16,15 @@ builder.Services.AddInfra();
 
 var app = builder.Build();
 
-app.UseException();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Store");
 });
-
-app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization(); 
+app.UseException();
+app.UseInfra();
 
 app.MapControllers();
 

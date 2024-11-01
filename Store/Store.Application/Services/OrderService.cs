@@ -31,11 +31,18 @@ public class OrderService
             return result;
         }
 
-        var boxes = boxRepository.GetAllTypesOfBoxes().OrderBy(box => box.Volume).ToList();
+        var boxesMolds = boxRepository.GetAllTypesOfBoxes().OrderBy(boxMold => boxMold.Volume);
+
+        if (!boxesMolds.Any())
+        {
+            result.AddValidation(ValidationType.EmptyBoxMoldList);
+
+            return result;
+        }
         
         foreach (var order in orders)
         {
-            BoxOrder(boxes, order);
+            BoxOrder(boxesMolds, order);
         }
         
         result = postProcessOrdersValidation.Validate(orders);
@@ -50,12 +57,12 @@ public class OrderService
         return result;
     }
 
-    private static void BoxOrder(List<BoxMold> boxes, Order order)
+    private static void BoxOrder(IEnumerable<BoxMold> boxesMolds, Order order)
     {
         var productsNotBoxed = order.Products.Where(product => !order.IsBoxed(product)).ToList();
         
         //tenta colocar todos os produtos em uma unica caixa
-        foreach (var boxMold in boxes)
+        foreach (var boxMold in boxesMolds)
         {
             var box = new Box(boxMold);
             
@@ -68,7 +75,7 @@ public class OrderService
         }
         
         //pega a menor caixa para colocar o maximo de produtos
-        var biggestBoxMold = boxes.MaxBy(box => box.Volume);
+        var biggestBoxMold = boxesMolds.MaxBy(box => box.Volume);
 
         foreach (var product in productsNotBoxed)
         {
@@ -81,6 +88,6 @@ public class OrderService
         }
         
         //refazer o processo
-        BoxOrder(boxes, order);
+        BoxOrder(boxesMolds, order);
     }
 }
