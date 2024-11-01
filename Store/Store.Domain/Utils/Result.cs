@@ -14,7 +14,7 @@ public class Result<T>
     /// <summary>
     /// Listagem de validações do objeto.
     /// </summary>
-    public List<Validation> Validations { get; set; } = [];
+    public List<Validation> Errors { get; set; } = [];
     
     /// <summary>
     /// Método de verificação da integridade do objeto a partir das validações.
@@ -22,7 +22,7 @@ public class Result<T>
     /// <returns>Verificação de existencia de validações.</returns>
     public bool IsValid()
     {
-        return !Validations.Any();
+        return !Errors.Any();
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ public class Result<T>
     /// <param name="type">Tipo da validação q vai ser adicionada.</param>
     public void AddValidation(ValidationType type)
     {
-        Validations.Add(new Validation { Type = type });
+        Errors.Add(new Validation { Type = type });
     }
 }
 

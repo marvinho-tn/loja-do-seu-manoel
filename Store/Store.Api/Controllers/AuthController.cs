@@ -19,7 +19,8 @@ public class AuthController(IAuthService authService) : ControllerBase
     public IActionResult Login([FromBody] UserLoginModel login)
     {
         var token = authService.Auth(login.Username, login.Password);
+        var result = new ResultViewModel(new { token });
         
-        return token is not null ? Ok(new { token }) : Unauthorized();
+        return token is not null ? Ok(result) : Unauthorized(result);
     }
 }

@@ -24,13 +24,14 @@ namespace Store.Api.Controllers
         {
             var orders = ordersModel.ConvertToOrder();
             var result = orderService.ProcessOrders(orders);
+            var view = new ResultViewModel(result.Obj.ConvertToViewModelResult(), result.Errors);
 
             if (!result.IsValid())
             {
-                return UnprocessableEntity(result.Validations);
+                return UnprocessableEntity(view);
             }
             
-            return Created("", result.Obj.ConvertToViewModelResult());
+            return Created("", view);
         }
     }
 }

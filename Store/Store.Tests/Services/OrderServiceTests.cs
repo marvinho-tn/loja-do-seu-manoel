@@ -118,7 +118,7 @@ public class OrderServiceTests
         //Asserts
         Assert.NotNull(result);
         Assert.NotNull(result.Obj);
-        Assert.Empty(result.Validations);
+        Assert.Empty(result.Errors);
         Assert.Equivalent(orders.Count, result.Obj.Count);
         Assert.Equivalent(orders.Sum(order => order.Products.Count), result.Obj.Sum(order => order.Products.Count));
         Assert.Equivalent(result.Obj.Sum(order => order.Products.Count), result.Obj.Sum(order => order.Boxes.Sum(box => box.Products.Count)));
@@ -201,7 +201,7 @@ public class OrderServiceTests
         var result = orderService.ProcessOrders(orders);
 
         //Asserts
-        Assert.Empty(result.Validations);
+        Assert.Empty(result.Errors);
         Assert.True(result.Obj[0].Boxes[0].OfType(boxMolds[1]));
     }
 
@@ -221,8 +221,8 @@ public class OrderServiceTests
         //Asserts
         Assert.NotNull(result);
         Assert.Null(result.Obj);
-        Assert.NotEmpty(result.Validations);
-        Assert.Contains(result.Validations, validation => validation.Type == ValidationType.OrderListCannotBeEmpty);
+        Assert.NotEmpty(result.Errors);
+        Assert.Contains(result.Errors, validation => validation.Type == ValidationType.OrderListCannotBeEmpty);
     }
 
     [Fact]
@@ -245,8 +245,8 @@ public class OrderServiceTests
         //Asserts
         Assert.NotNull(result);
         Assert.Null(result.Obj);
-        Assert.NotEmpty(result.Validations);
-        Assert.Contains(result.Validations, validation => validation.Type == ValidationType.ProductOrderListCannotBeEmpty);
+        Assert.NotEmpty(result.Errors);
+        Assert.Contains(result.Errors, validation => validation.Type == ValidationType.ProductOrderListCannotBeEmpty);
     }
 
     [Fact]
@@ -304,7 +304,7 @@ public class OrderServiceTests
         //Asserts
         Assert.NotNull(result);
         Assert.Null(result.Obj);
-        Assert.NotEmpty(result.Validations);
-        Assert.Contains(result.Validations, validation => validation.Type == ValidationType.ImpossibleToBoxOrder);
+        Assert.NotEmpty(result.Errors);
+        Assert.Contains(result.Errors, validation => validation.Type == ValidationType.ImpossibleToBoxOrder);
     }
 }
