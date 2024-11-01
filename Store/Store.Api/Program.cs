@@ -6,25 +6,29 @@ using Store.Infra.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAuth(builder.Configuration);
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddStoreSwagger();
-builder.Services.AddDomain();
-builder.Services.AddApplication();
-builder.Services.AddInfra();
+builder
+    .Services
+    .AddAuth(builder.Configuration)
+    .AddControllers()
+    .Services
+    .AddEndpointsApiExplorer()
+    .AddStoreSwagger()
+    .AddDomain()
+    .AddApplication()
+    .AddInfra();
 
 var app = builder.Build();
 
-app.UseSwagger();
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Store");
-});
-app.UseAuthentication();
-app.UseAuthorization(); 
-app.UseException();
-app.UseInfra();
+app
+    .UseSwagger()
+    .UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "Store");
+    })
+    .UseAuthentication()
+    .UseAuthorization()
+    .UseException()
+    .UseInfra();
 
 app.MapControllers();
 

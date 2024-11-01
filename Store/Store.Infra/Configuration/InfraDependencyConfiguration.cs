@@ -17,19 +17,18 @@ public static class InfraDependencyConfiguration
     /// </summary>
     public static IServiceCollection AddInfra(this IServiceCollection services)
     {
-        services.AddTransient<IBoxRepository, BoxRepository>();
-
-        services.AddDbContext<StoreDbContext>(options => options.UseInMemoryDatabase("StoreDb"));
-
-        return services;
+        return services
+            .AddTransient<IBoxRepository, BoxRepository>()
+            .AddDbContext<StoreDbContext>(options => options.UseInMemoryDatabase("StoreDb"));
     }
 
     public static IApplicationBuilder UseInfra(this IApplicationBuilder app)
     {
         var context = app.ApplicationServices.GetRequiredService<StoreDbContext>();
-        
-        context.Database.EnsureCreated();
+        var isCreated = context.Database.EnsureCreated();
 
+        Console.WriteLine($"Banco de dados Store is created? {isCreated}");
+        
         return app;
     }
 }

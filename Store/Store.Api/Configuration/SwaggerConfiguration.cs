@@ -10,10 +10,10 @@ public static class SwaggerConfiguration
     /// <summary>
     /// Método de adição da configuração aos serviços da API.
     /// </summary>
-    public static void AddStoreSwagger(this IServiceCollection services)
+    public static IServiceCollection AddStoreSwagger(this IServiceCollection services)
     {
         // Configurando o Swagger para suportar JWT
-        services.AddSwaggerGen(options =>
+        return services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo { Title = "Store API", Version = "v1" });
 

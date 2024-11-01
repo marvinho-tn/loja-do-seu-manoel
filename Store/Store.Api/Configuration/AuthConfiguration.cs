@@ -15,7 +15,7 @@ public static class AuthConfiguration
     /// <summary>
     /// Método de adição da configuração aos serviços da API.
     /// </summary>
-    public static void AddAuth(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         // Mapeia a seção JwtSettings do appsettings.json
         services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
@@ -44,7 +44,8 @@ public static class AuthConfiguration
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });
+        
         // Injeta serviços de autorização
-        services.AddTransient<IAuthService, AuthService>();
+        return services.AddTransient<IAuthService, AuthService>();
     }
 }

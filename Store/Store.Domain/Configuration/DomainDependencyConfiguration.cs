@@ -13,9 +13,8 @@ public static class DomainDependencyConfiguration
     /// </summary>
     public static IServiceCollection AddDomain(this IServiceCollection services)
     {
-        services.AddTransient<ProcessOrdersValidation>();
-        services.AddTransient<PostProcessOrdersValidation>();
-
-        return services;
+        return services
+            .AddTransient<ProcessOrdersValidation>()
+            .AddTransient<PostProcessOrdersValidation>();
     }
 }

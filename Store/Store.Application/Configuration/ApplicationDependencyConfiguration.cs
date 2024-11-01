@@ -14,8 +14,6 @@ public static class ApplicationDependencyConfiguration
     /// </summary>
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
-        services.AddTransient<IOrderService, OrderService>();
-
-        return services;
+        return services.AddTransient<IOrderService, OrderService>();
     }
 }
