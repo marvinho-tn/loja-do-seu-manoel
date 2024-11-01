@@ -1,4 +1,5 @@
 using Store.Api.Configuration;
+using Store.Api.Middlewares;
 using Store.Application.Configuration;
 using Store.Domain.Configuration;
 using Store.Infra.Configuration;
@@ -15,6 +16,7 @@ builder.Services.AddInfra();
 
 var app = builder.Build();
 
+app.UseException();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {

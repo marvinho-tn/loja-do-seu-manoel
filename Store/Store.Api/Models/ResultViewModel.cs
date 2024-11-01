@@ -3,7 +3,7 @@ using Store.Domain.Utils;
 
 namespace Store.Api.Models;
 
-public class ResultViewModel(object obj, IEnumerable<Validation> errors = null)
+public class ResultViewModel(object obj = null, IEnumerable<Validation> errors = null)
 {
     [JsonPropertyName("objeto")] 
     public object Obj { get; set; } = obj;

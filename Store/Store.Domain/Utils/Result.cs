@@ -31,19 +31,19 @@ public class Result<T>
     /// <param name="type">Tipo da validação q vai ser adicionada.</param>
     public void AddValidation(ValidationType type)
     {
-        Errors.Add(new Validation { Type = type });
+        Errors.Add(new Validation(type));
     }
 }
 
 /// <summary>
 /// Classe de representação de validações.
 /// </summary>
-public class Validation
+public class Validation(ValidationType type)
 {
     /// <summary>
     /// Tipo da validação representada.
     /// </summary>
-    public ValidationType Type { get; set; }
+    public ValidationType Type { get; set; } = type;
 }
 
 /// <summary>
@@ -53,5 +53,6 @@ public enum ValidationType
 {
     OrderListCannotBeEmpty,
     ProductOrderListCannotBeEmpty,
-    ImpossibleToBoxOrder
+    ImpossibleToBoxOrder,
+    UnexpectedError,
 }
