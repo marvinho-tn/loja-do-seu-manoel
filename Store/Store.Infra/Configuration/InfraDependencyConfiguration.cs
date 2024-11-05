@@ -20,6 +20,7 @@ public static class InfraDependencyConfiguration
         return services
             .AddTransient<IBoxRepository, BoxRepository>()
             .AddTransient<IOrderRepository, OrderRepository>()
+            .AddTransient<IProductRepository, ProductRepository>()
             .AddDbContext<StoreDbContext>(options => options.UseInMemoryDatabase("StoreDb"));
     }
 

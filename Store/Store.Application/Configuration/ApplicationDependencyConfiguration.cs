@@ -16,6 +16,7 @@ public static class ApplicationDependencyConfiguration
     {
         return services
             .AddTransient<IOrderService, OrderService>()
+            .AddTransient<IProductService, ProductService>()
             .AddTransient<IBoxService, BoxService>();
     }
 }

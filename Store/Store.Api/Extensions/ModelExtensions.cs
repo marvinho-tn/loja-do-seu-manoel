@@ -43,4 +43,14 @@ public static class CreateOrderViewModelExtensions
             Products = box.Products.Select(product => product.Id.Value),
         });
     }
+    
+    public static IEnumerable<Guid>? ConvertToViewModelResult(this IEnumerable<Product>? products)
+    {
+        if (products is null)
+        {
+            return null;
+        }
+        
+        return products.Select(box => box.Id.Value);
+    }
 }
