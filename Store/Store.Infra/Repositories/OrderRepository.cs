@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Store.Domain.Entities;
 using Store.Domain.Repositories;
 using Store.Infra.Configuration.Database;
@@ -12,8 +13,12 @@ public class OrderRepository(StoreDbContext context) : IOrderRepository
         context.SaveChanges();
     }
 
-    public IEnumerable<Order> GetAll()
+    public IEnumerable<Order> GetAllWithBoxesThenProducts()
     {
-        return context.Set<Order>().ToList();
+        return context
+            .Set<Order>()
+            .Include(order => order.Boxes)
+            .ThenInclude(box => box.Products)
+            .ToList();
     }
 }

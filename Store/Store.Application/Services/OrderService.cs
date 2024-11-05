@@ -66,7 +66,7 @@ public class OrderService
     /// <returns>Listagem de pedidos.</returns>
     public Result<IEnumerable<Order>> GetAllOrders()
     {
-        var orders = orderRepository.GetAll();
+        var orders = orderRepository.GetAllWithBoxesThenProducts();
         var result = new Result<IEnumerable<Order>>(orders);
 
         return result;

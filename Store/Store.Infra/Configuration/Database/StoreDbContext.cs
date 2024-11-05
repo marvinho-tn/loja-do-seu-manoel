@@ -39,6 +39,10 @@ public class StoreDbContext(DbContextOptions<StoreDbContext> options) : DbContex
             .HasMany(entity => entity.Boxes);
         
         modelBuilder
+            .Entity<Box>()
+            .HasMany(entity => entity.Products);
+        
+        modelBuilder
             .Entity<Product>()
             .HasOne(entity => entity.Dimensions);
         

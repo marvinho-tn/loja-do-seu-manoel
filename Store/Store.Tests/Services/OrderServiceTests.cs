@@ -91,7 +91,7 @@ public class OrderServiceTests
             },
         };
         
-        orderRepository.GetAll().Returns(orders);
+        orderRepository.GetAllWithBoxesThenProducts().Returns(orders);
         
         //Act
         var result = orderService.GetAllOrders();
