@@ -18,4 +18,12 @@ public class BoxRepository(StoreDbContext context) : IBoxRepository
     {
         return context.Set<BoxMold>().ToList();
     }
+
+    public IEnumerable<Box> GetAllBoxesWithProducts()
+    {
+        return context
+            .Set<Box>()
+            .Include(box => box.Products)
+            .ToList();
+    }
 }

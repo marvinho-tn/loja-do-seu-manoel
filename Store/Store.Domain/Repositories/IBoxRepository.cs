@@ -1,4 +1,5 @@
 using Store.Domain.Entities;
+using Store.Domain.Utils;
 
 namespace Store.Domain.Repositories;
 
@@ -12,4 +13,6 @@ public interface IBoxRepository
     /// </summary>
     /// <returns>Listagem com moldes de caixa.</returns>
     IEnumerable<BoxMold> GetAllTypesOfBoxes();
+
+    IEnumerable<Box> GetAllBoxesWithProducts();
 }

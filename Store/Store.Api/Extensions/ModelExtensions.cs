@@ -29,4 +29,18 @@ public static class CreateOrderViewModelExtensions
             }),
         });
     }
+    
+    public static IEnumerable<BoxOrderViewModel>? ConvertToViewModelResult(this IEnumerable<Box>? boxes)
+    {
+        if (boxes is null)
+        {
+            return null;
+        }
+        
+        return boxes.Select(box => new BoxOrderViewModel
+        {
+            Id = box.Id,
+            Products = box.Products.Select(product => product.Id.Value),
+        });
+    }
 }
