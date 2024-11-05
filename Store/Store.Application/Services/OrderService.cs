@@ -12,6 +12,7 @@ namespace Store.Application.Services;
 public class OrderService
 (
     IBoxRepository boxRepository, 
+    IOrderRepository orderRepository,
     ProcessOrdersValidation processOrdersValidation, 
     PostProcessOrdersValidation postProcessOrdersValidation
 ): 
@@ -52,8 +53,22 @@ public class OrderService
             return result;
         }
         
+        orderRepository.Save(orders);
+        
         result.Obj = orders;
         
+        return result;
+    }
+
+    /// <summary>
+    /// Método de listagem de pedidos.
+    /// </summary>
+    /// <returns>Listagem de pedidos.</returns>
+    public Result<IEnumerable<Order>> GetAllOrders()
+    {
+        var orders = orderRepository.GetAll();
+        var result = new Result<IEnumerable<Order>>(orders);
+
         return result;
     }
 

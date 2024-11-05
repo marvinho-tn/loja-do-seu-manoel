@@ -13,7 +13,7 @@ public class CreateOrderViewModel
     /// Identificação do pedido.
     /// </summary>
     [JsonPropertyName("pedido_id")]
-    public uint Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     /// Listagem de caixas do pedido.

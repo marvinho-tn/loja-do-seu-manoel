@@ -30,9 +30,9 @@ public class MeasurableModel
     /// Método de conversão para o domínio.
     /// </summary>
     /// <returns>Entidade do domínio.</returns>
-    public Measurable ConvertToMeasurable()
+    public Dimensions ConvertToDimensions()
     {
-        return new Measurable
+        return new Dimensions(true)
         {
             Height = Height,
             Length = Length,

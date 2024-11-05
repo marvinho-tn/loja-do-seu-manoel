@@ -20,11 +20,13 @@ public class AuthService(IOptions<JwtSettings> jwtSettings) : IAuthService
     /// <returns>Token de autenticação.</returns>
     public string? Auth(string username, string password)
     {
-        if (username != jwtSettings.Value.DefaultUsername || password != jwtSettings.Value.DefaultPassword) return null;
-        
+        if (username != jwtSettings.Value.DefaultUsername || password != jwtSettings.Value.DefaultPassword)
+        {
+            return null;
+        }
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.UTF8.GetBytes(jwtSettings.Value.SecretKey);
-
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[] { new Claim("id", "1") }),

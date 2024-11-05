@@ -11,8 +11,36 @@ public class StoreDbContext(DbContextOptions<StoreDbContext> options) : DbContex
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder
+            .Entity<Order>()
+            .HasKey(entity => entity.Id);
+        
+        modelBuilder
+            .Entity<Product>()
+            .HasKey(entity => entity.Id);
+        
+        modelBuilder
+            .Entity<Box>()
+            .HasKey(entity => entity.Id);
+        
+        modelBuilder
+            .Entity<Dimensions>()
+            .HasKey(entity => entity.Id);
+        
+        modelBuilder
             .Entity<BoxMold>()
             .HasKey(entity => new { entity.Height, entity.Length, entity.Width });
+
+        modelBuilder
+            .Entity<Order>()
+            .HasMany(entity => entity.Products);
+        
+        modelBuilder
+            .Entity<Order>()
+            .HasMany(entity => entity.Boxes);
+        
+        modelBuilder
+            .Entity<Product>()
+            .HasOne(entity => entity.Dimensions);
         
         modelBuilder
             .Entity<BoxMold>()

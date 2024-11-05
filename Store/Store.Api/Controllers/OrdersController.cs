@@ -24,14 +24,33 @@ namespace Store.Api.Controllers
         {
             var orders = ordersModel.ConvertToOrder();
             var result = orderService.ProcessOrders(orders);
-            var view = new ResultViewModel(result.Obj.ConvertToViewModelResult(), result.Errors);
+            var resultViewModel = new ResultViewModel(result.Obj.ConvertToViewModelResult(), result.Errors);
 
             if (!result.IsValid())
             {
-                return UnprocessableEntity(view);
+                return UnprocessableEntity(resultViewModel);
             }
             
-            return Created("", view);
+            return Created("pedidos", resultViewModel);
+        }
+
+        /// <summary>
+        /// Endpoint de listagem de pedidos.
+        /// </summary>
+        /// <returns>Listagem de pedidos.</returns>
+        [HttpGet]
+        [Authorize]
+        public IActionResult GetOrders()
+        {
+            var result = orderService.GetAllOrders();
+            var resultViewModel = new ResultViewModel(result.Obj.ConvertToViewModelResult(), result.Errors);
+            
+            if (!result.IsValid())
+            {
+                return BadRequest(resultViewModel);
+            }
+            
+            return Ok(resultViewModel);
         }
     }
 }

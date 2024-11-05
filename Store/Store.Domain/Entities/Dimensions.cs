@@ -1,10 +1,19 @@
 namespace Store.Domain.Entities;
 
-/// <summary>
-/// Classe de representação de objetos dimensionáveis.
-/// </summary>
-public class Measurable
+public class Dimensions
 {
+    public Dimensions()
+    {
+        
+    }
+
+    public Dimensions(bool newObj)
+    {
+        Id = newObj ? Guid.NewGuid() : null;
+    }
+    
+    public Guid? Id { get; set; }
+    
     /// <summary>
     /// Largura do objeto.
     /// </summary>

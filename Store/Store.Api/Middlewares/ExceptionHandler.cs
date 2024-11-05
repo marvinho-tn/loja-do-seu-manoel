@@ -5,8 +5,14 @@ using Store.Domain.Utils;
 
 namespace Store.Api.Middlewares;
 
+/// <summary>
+/// Classe de configuração do handler de excessões.
+/// </summary>
 public class ExceptionHandler(RequestDelegate next)
 {
+    /// <summary>
+    /// Método de processamento da excessão.
+    /// </summary>
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -32,8 +38,14 @@ public class ExceptionHandler(RequestDelegate next)
     }
 }
 
+/// <summary>
+/// Classe de configuração da excessão na API.
+/// </summary>
 public static class ExceptionHandlerExtensions
 {
+    /// <summary>
+    /// Método de configuração do handler.
+    /// </summary>
     public static IApplicationBuilder UseException(this IApplicationBuilder builder)
     {
         return builder.UseMiddleware<ExceptionHandler>();

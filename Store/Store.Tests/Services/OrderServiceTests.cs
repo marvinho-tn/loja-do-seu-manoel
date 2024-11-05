@@ -10,13 +10,14 @@ namespace Store.Tests.Services;
 public class OrderServiceTests
 {
     [Fact]
-    public async void ItMustBePossibleToBoxSuccessfully_WhenProductsFitInASingleBox()
+    public async void ItMustBePossibleToGetAllOrdersSuccessfully()
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
+        var orderRepository = Substitute.For<IOrderRepository>();
         var proccessOrdersValidation = new ProcessOrdersValidation();
         var postProccessOrdersValidation = new PostProcessOrdersValidation();
-        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
+        var orderService = new OrderService(boxRepository, orderRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order
@@ -25,7 +26,7 @@ public class OrderServiceTests
                 {
                     new Product
                     {
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 10,
                             Length = 10,
@@ -34,7 +35,7 @@ public class OrderServiceTests
                     },
                     new Product
                     {
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 20,
                             Length = 10,
@@ -43,7 +44,7 @@ public class OrderServiceTests
                     },
                     new Product
                     {
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 30,
                             Length = 10,
@@ -59,7 +60,7 @@ public class OrderServiceTests
                     new Product
                     {
                         
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 10,
                             Length = 20,
@@ -69,7 +70,7 @@ public class OrderServiceTests
                     new Product
                     {
                         
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 20,
                             Length = 20,
@@ -79,7 +80,101 @@ public class OrderServiceTests
                     new Product
                     {
                         
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
+                        {
+                            Height = 30,
+                            Length = 20,
+                            Width = 10,
+                        }
+                    },
+                },
+            },
+        };
+        
+        orderRepository.GetAll().Returns(orders);
+        
+        //Act
+        var result = orderService.GetAllOrders();
+
+        //Asserts
+        Assert.NotNull(result);
+        Assert.NotNull(result.Obj);
+        Assert.Empty(result.Errors);
+        Assert.Same(result.Obj, orders);
+    }
+    
+    [Fact]
+    public async void ItMustBePossibleToBoxSuccessfully_WhenProductsFitInASingleBox()
+    {
+        //Arrange
+        var boxRepository = Substitute.For<IBoxRepository>();
+        var orderRepository = Substitute.For<IOrderRepository>();
+        var proccessOrdersValidation = new ProcessOrdersValidation();
+        var postProccessOrdersValidation = new PostProcessOrdersValidation();
+        var orderService = new OrderService(boxRepository, orderRepository, proccessOrdersValidation, postProccessOrdersValidation);
+        var orders = new List<Order>
+        {
+            new Order
+            {
+                Products = new List<Product>
+                {
+                    new Product
+                    {
+                        Dimensions = new Dimensions
+                        {
+                            Height = 10,
+                            Length = 10,
+                            Width = 10,
+                        }
+                    },
+                    new Product
+                    {
+                        Dimensions = new Dimensions
+                        {
+                            Height = 20,
+                            Length = 10,
+                            Width = 10,
+                        }
+                    },
+                    new Product
+                    {
+                        Dimensions = new Dimensions
+                        {
+                            Height = 30,
+                            Length = 10,
+                            Width = 10,
+                        }
+                    },
+                },
+            },
+            new Order
+            {
+                Products = new List<Product>
+                {
+                    new Product
+                    {
+                        
+                        Dimensions = new Dimensions
+                        {
+                            Height = 10,
+                            Length = 20,
+                            Width = 10,
+                        }
+                    },
+                    new Product
+                    {
+                        
+                        Dimensions = new Dimensions
+                        {
+                            Height = 20,
+                            Length = 20,
+                            Width = 10,
+                        }
+                    },
+                    new Product
+                    {
+                        
+                        Dimensions = new Dimensions
                         {
                             Height = 30,
                             Length = 20,
@@ -130,9 +225,10 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
+        var orderRepository = Substitute.For<IOrderRepository>();
         var proccessOrdersValidation = new ProcessOrdersValidation();
         var postProccessOrdersValidation = new PostProcessOrdersValidation();
-        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
+        var orderService = new OrderService(boxRepository, orderRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order
@@ -142,7 +238,7 @@ public class OrderServiceTests
                     new Product
                     {
                         
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 10,
                             Length = 10,
@@ -152,7 +248,7 @@ public class OrderServiceTests
                     new Product
                     {
                         
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 20,
                             Length = 10,
@@ -162,7 +258,7 @@ public class OrderServiceTests
                     new Product
                     {
                         
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 30,
                             Length = 10,
@@ -210,9 +306,10 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
+        var orderRepository = Substitute.For<IOrderRepository>();
         var proccessOrdersValidation = new ProcessOrdersValidation();
         var postProccessOrdersValidation = new PostProcessOrdersValidation();
-        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
+        var orderService = new OrderService(boxRepository, orderRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>();
         
         //Act
@@ -230,9 +327,10 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
+        var orderRepository = Substitute.For<IOrderRepository>();
         var proccessOrdersValidation = new ProcessOrdersValidation();
         var postProccessOrdersValidation = new PostProcessOrdersValidation();
-        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
+        var orderService = new OrderService(boxRepository, orderRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order(),
@@ -254,9 +352,10 @@ public class OrderServiceTests
     {
         //Arrange
         var boxRepository = Substitute.For<IBoxRepository>();
+        var orderRepository = Substitute.For<IOrderRepository>();
         var proccessOrdersValidation = new ProcessOrdersValidation();
         var postProccessOrdersValidation = new PostProcessOrdersValidation();
-        var orderService = new OrderService(boxRepository, proccessOrdersValidation, postProccessOrdersValidation);
+        var orderService = new OrderService(boxRepository, orderRepository, proccessOrdersValidation, postProccessOrdersValidation);
         var orders = new List<Order>
         {
             new Order
@@ -265,7 +364,7 @@ public class OrderServiceTests
                 {
                     new Product
                     {
-                        Dimensions = new Measurable
+                        Dimensions = new Dimensions
                         {
                             Height = 150,
                             Length = 150,

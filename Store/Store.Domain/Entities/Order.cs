@@ -5,10 +5,20 @@ namespace Store.Domain.Entities;
 /// </summary>
 public class Order
 {
+    public Order()
+    {
+        
+    }
+
+    public Order(bool newObj)
+    {
+        Id = newObj ? Guid.NewGuid() : null;
+    }
+
     /// <summary>
     /// Identificação do pedido.
     /// </summary>
-    public uint Id { get; set; }
+    public Guid? Id { get; set; }
     
     /// <summary>
     /// Produtos do pedido.

@@ -9,12 +9,6 @@ namespace Store.Api.Models;
 public class ProductOrderModel
 {
     /// <summary>
-    /// Identificação do produto.
-    /// </summary>
-    [JsonPropertyName("produto_id")]
-    public string Id { get; set; } = null!;
-    
-    /// <summary>
     /// Dimensões do produto.
     /// </summary>
     [JsonPropertyName("dimensoes")]
@@ -26,10 +20,9 @@ public class ProductOrderModel
     /// <returns>Entidade de domínio.</returns>
     public Product ConvertToProduct()
     {
-        return new Product
+        return new Product(true)
         {
-            Id = Id,
-            Dimensions = Dimensions.ConvertToMeasurable()
+            Dimensions = Dimensions.ConvertToDimensions()
         };
     }
 }

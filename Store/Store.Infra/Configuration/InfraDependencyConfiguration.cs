@@ -19,9 +19,13 @@ public static class InfraDependencyConfiguration
     {
         return services
             .AddTransient<IBoxRepository, BoxRepository>()
+            .AddTransient<IOrderRepository, OrderRepository>()
             .AddDbContext<StoreDbContext>(options => options.UseInMemoryDatabase("StoreDb"));
     }
 
+    /// <summary>
+    /// Método de configuração da infra.
+    /// </summary>
     public static IApplicationBuilder UseInfra(this IApplicationBuilder app)
     {
         var context = app.ApplicationServices.GetRequiredService<StoreDbContext>();

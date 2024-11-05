@@ -9,12 +9,6 @@ namespace Store.Api.Models;
 public class CreateOrderModel
 {
     /// <summary>
-    /// Identificação do pedido.
-    /// </summary>
-    [JsonPropertyName("pedido_id")] 
-    public uint Id { get; set; }
-    
-    /// <summary>
     /// Listagem de produtos contidos no pedido.
     /// </summary>
     [JsonPropertyName("produtos")]
@@ -26,9 +20,8 @@ public class CreateOrderModel
     /// <returns>Entidade de domínio com o pedido.</returns>
     public Order ConvertToOrder()
     {
-        return new Order
+        return new Order(true)
         {
-            Id = Id,
             Products = Products.Select(product => product.ConvertToProduct()).ToList()
         };
     }

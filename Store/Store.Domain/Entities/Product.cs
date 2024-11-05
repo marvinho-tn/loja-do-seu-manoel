@@ -5,13 +5,23 @@ namespace Store.Domain.Entities;
 /// </summary>
 public class Product
 {
+    public Product()
+    {
+        
+    }
+
+    public Product(bool newObj)
+    {
+        Id = newObj ? Guid.NewGuid() : null;
+    }
+
     /// <summary>
     /// Identificação do produto.
     /// </summary>
-    public string Id { get; set; }
+    public Guid? Id { get; set; }
     
     /// <summary>
     /// Dimensões do produto.
     /// </summary>
-    public Measurable Dimensions { get; set; }
+    public Dimensions Dimensions { get; set; }
 }

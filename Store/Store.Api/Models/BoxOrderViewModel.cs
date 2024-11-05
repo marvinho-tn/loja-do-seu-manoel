@@ -11,11 +11,11 @@ public class BoxOrderViewModel
     /// Identificação da caixa.
     /// </summary>
     [JsonPropertyName("caixa_id")]
-    public string Id { get; set; } = null!;
+    public Guid Id { get; set; }
 
     /// <summary>
     /// Listagem com os nomes dos produtos contidos na caixa.
     /// </summary>
     [JsonPropertyName("produtos")] 
-    public IEnumerable<string> Products { get; set; } = [];
+    public IEnumerable<Guid> Products { get; set; } = [];
 }

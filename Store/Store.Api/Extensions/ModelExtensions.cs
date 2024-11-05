@@ -21,11 +21,11 @@ public static class CreateOrderViewModelExtensions
         
         return orders.Select(order => new CreateOrderViewModel
         {
-            Id = order.Id,
+            Id = order.Id.Value,
             Boxes = order.Boxes.Select(box => new BoxOrderViewModel
             {
                 Id = box.Id,
-                Products = box.Products.Select(product => product.Id),
+                Products = box.Products.Select(product => product.Id.Value),
             }),
         });
     }

@@ -14,4 +14,10 @@ public interface IOrderService
     /// <param name="orders">Pedidos a serem processados.</param>
     /// <returns>Listagem de pedidos processados.</returns>
     Result<List<Order>> ProcessOrders(List<Order> orders);
+    
+    /// <summary>
+    /// Método de listagem de pedidos.
+    /// </summary>
+    /// <returns>Listagem de pedidos.</returns>
+    Result<IEnumerable<Order>> GetAllOrders();
 }

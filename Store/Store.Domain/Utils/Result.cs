@@ -6,6 +6,13 @@ namespace Store.Domain.Utils;
 /// <typeparam name="T">Tipo do objeto a ser retornado.</typeparam>
 public class Result<T>
 {
+    public Result() { }
+    
+    public Result(T obj)
+    {
+        Obj = obj;
+    }
+    
     /// <summary>
     /// Objeto a ser retornado.
     /// </summary>

@@ -3,8 +3,13 @@ namespace Store.Domain.Entities;
 /// <summary>
 /// Objeto de representação da caixa.
 /// </summary>
-public class Box : Measurable
+public class Box
 {
+    public Box()
+    {
+        
+    }
+    
     /// <summary>
     /// Construtor da caixa a partir ou não de um molde.
     /// </summary>
@@ -14,18 +19,38 @@ public class Box : Measurable
         Width = boxMold?.Width ?? 0;
         Height = boxMold?.Height ?? 0;
         Length = boxMold?.Length ?? 0;
-        Id = $"Caixa {Width}x{Height}x{Length}";
+        Id = Guid.NewGuid();
     }
     
     /// <summary>
     /// Identificação da caixa
     /// </summary>
-    public string Id { get; set; }
+    public Guid Id { get; set; }
+    
+    /// <summary>
+    /// Largura do objeto.
+    /// </summary>
+    public uint Width { get; set; }
+    
+    /// <summary>
+    /// Altura do objeto.
+    /// </summary>
+    public uint Height { get; set; }
+    
+    /// <summary>
+    /// Comprimento do objeto.
+    /// </summary>
+    public uint Length { get; set; }
     
     /// <summary>
     /// Produtos contidos na caixa.
     /// </summary>
     public List<Product> Products { get; set; } = [];
+
+    /// <summary>
+    /// Volume do objeto.
+    /// </summary>
+    public uint Volume => Height * Width * Length;
     
     /// <summary>
     /// Volume disponível na caixa.
